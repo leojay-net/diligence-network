@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Diligence Network — Operator Console</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <h1>Diligence Network</h1>
+      <p class="subtitle">Operator console — orders, deliveries, and the audit trail behind every report.</p>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel" id="reports-panel">
+      <div class="panel-header">
+        <h2>Reports</h2>
+        <span class="panel-note" id="reports-count"></span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Subject</th>
+              <th>Confidence</th>
+              <th>Supported</th>
+              <th>Contradicted</th>
+              <th>Unverifiable</th>
+              <th>Generated</th>
+            </tr>
+          </thead>
+          <tbody id="reports-body"></tbody>
+        </table>
+      </div>
+      <div class="detail" id="report-detail" hidden></div>
+    </section>
+
+    <section class="panel" id="orders-panel">
+      <div class="panel-header">
+        <h2>Orders</h2>
+        <span class="panel-note" id="orders-count"></span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Order</th>
+              <th>Direction</th>
+              <th>Counterparty</th>
+              <th>Service</th>
+              <th>Price (USDC)</th>
+              <th>Status</th>
+              <th>Updated</th>
+            </tr>
+          </thead>
+          <tbody id="orders-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" id="audit-panel">
+      <div class="panel-header">
+        <h2>Audit trail</h2>
+        <span class="panel-note" id="audit-count"></span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Report</th>
+              <th>Subtask</th>
+              <th>Agent role</th>
+              <th>Service</th>
+              <th>Order</th>
+              <th>Cost (USDC)</th>
+              <th>Status</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody id="audit-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

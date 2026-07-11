@@ -1,0 +1,25 @@
+{
+  "name": "diligence-network",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A verified due-diligence network of independently listed CAP agents that hire, verify, and settle with one another.",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "dev:orchestrator": "npm run dev --workspace packages/orchestrator",
+    "dev:source-finder": "npm run dev --workspace packages/source-finder",
+    "dev:claim-grader": "npm run dev --workspace packages/claim-grader",
+    "dev:dashboard": "npm run dev --workspace apps/dashboard",
+    "demo:buyer": "tsx packages/orchestrator/src/simulate-buyer.ts",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "tsx --test packages/core/src/sim/simAgentClient.test.ts",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "license": "MIT"
+}
