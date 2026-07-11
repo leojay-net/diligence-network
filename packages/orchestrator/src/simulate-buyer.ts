@@ -14,7 +14,10 @@ const logger = createLogger("simulate-buyer");
 async function main(): Promise<void> {
   const subject = process.argv.slice(2).join(" ") || "The CROO Agent Protocol itself";
 
-  const client = createCapClient({ sdkKey: "demo-buyer", serviceId: "demo-buyer" });
+  const client = createCapClient({
+    sdkKey: config.agents.demoBuyer.sdkKey(),
+    serviceId: config.agents.demoBuyer.serviceId(),
+  });
   const stream = await client.connectWebSocket();
   const hirer = new Hirer(client, stream, logger);
 

@@ -77,6 +77,11 @@ export const config = {
       serviceId: () => optional("CLAIM_GRADER_SERVICE_ID", "claim-grader-v1"),
       priceUsdc: () => optional("CLAIM_GRADER_PRICE_USDC", "0.35"),
     },
+    /** Not a real network participant with its own service - just an identity for testing and demos (see simulate-buyer.ts). */
+    demoBuyer: {
+      sdkKey: () => optional("DEMO_BUYER_SDK_KEY", "demo-buyer"),
+      serviceId: () => optional("DEMO_BUYER_SERVICE_ID", "demo-buyer"),
+    },
   },
   dbPath: () => optional("DILIGENCE_DB_PATH", "./data/diligence.sqlite"),
   simDbPath: () => optional("CAP_SIM_DB_PATH", "./data/cap-sim.sqlite"),
