@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 /**
- * Zod schemas double as the JSON Schema fed to Claude's structured-output
- * config (via zodOutputFormat) and as the runtime validator for the parsed
+ * Zod schemas double as the JSON Schema fed to Gemini's structured-output
+ * config (via z.toJSONSchema) and as the runtime validator for the parsed
  * response - one definition, so the type the model is constrained to and the
  * type the rest of the system trusts can never drift apart.
  */

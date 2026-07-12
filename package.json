@@ -17,6 +17,7 @@
     "dev:claim-grader": "npm run dev --workspace packages/claim-grader",
     "dev:dashboard": "npm run dev --workspace apps/dashboard",
     "demo:buyer": "tsx packages/orchestrator/src/simulate-buyer.ts",
+    "smoke:gemini": "tsx packages/core/src/gemini-smoke-test.ts",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "test": "tsx --test packages/core/src/sim/simAgentClient.test.ts",
     "lint": "npm run lint --workspaces --if-present"

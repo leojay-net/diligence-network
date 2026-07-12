@@ -135,8 +135,20 @@ npm install
 cp .env.example .env
 ```
 
-Set `ANTHROPIC_API_KEY`. Everything else has a working default for
+Set `GEMINI_API_KEY`. Everything else has a working default for
 simulated mode.
+
+Verify the key actually works, including Google Search grounding, before
+running the full system:
+
+```bash
+npm run smoke:gemini
+```
+
+Grounding is billed and quota'd separately from plain generation - if this
+fails with `429 RESOURCE_EXHAUSTED` while a plain (non-grounded) call
+succeeds, the key's project needs billing enabled or a grounding-specific
+quota increase in Google AI Studio; it's not a bug in this code.
 
 ### 3. Choose a mode
 
@@ -145,7 +157,7 @@ CAP's own order lifecycle - negotiate, accept, pay, deliver, clear - backed
 by a shared local SQLite file instead of the real network. Every agent's
 business logic is byte-for-byte identical in this mode; only
 `packages/core/src/capClient.ts`'s factory function decides which transport
-to construct. This is what lets the whole system, including real Claude
+to construct. This is what lets the whole system, including real Gemini
 API calls for research and grading, run end-to-end before any wallet is
 funded or any Dashboard registration exists.
 

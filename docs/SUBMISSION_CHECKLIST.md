@@ -42,7 +42,7 @@ For each of the three service agents, on the service wizard:
   budget math (`maxAffordableQuestions` in `packages/orchestrator/src/workflow.ts`)
   stays accurate
 - **SLA**: minimum is 5 minutes; give Source Finder and Claim Grader enough
-  room for a real web-search-backed Claude call — 10–15 minutes is safer
+  room for a real web-search-backed Gemini call — 10–15 minutes is safer
   than the minimum. Diligence Lead's own SLA needs to cover the *whole*
   workflow (its own two sub-hires plus their SLAs), so give it the longest
   window, e.g. 30 minutes
@@ -116,7 +116,7 @@ npm run demo:buyer -- "<a real subject>"
 
 Watch `localhost:4400` fill in as each hop clears. If a step times out or
 gets rejected, that's the SLA windows from step 2 being too tight for a real
-Claude + web-search round trip — loosen them before recording.
+Gemini + web-search round trip — loosen them before recording.
 
 ## 6. Record the demo
 

@@ -55,7 +55,7 @@ export type CapMode = "live" | "simulated";
  * separate agentId concept.
  */
 export const config = {
-  anthropicApiKey: () => required("ANTHROPIC_API_KEY"),
+  geminiApiKey: () => required("GEMINI_API_KEY"),
   capMode: (): CapMode => (optional("CAP_MODE", "simulated") === "live" ? "live" : "simulated"),
   croo: {
     apiUrl: () => optional("CROO_API_URL", "https://api.croo.network"),
