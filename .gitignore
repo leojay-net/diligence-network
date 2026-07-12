@@ -5,6 +5,5 @@ build/
 .env
 *.log
 .DS_Store
-data/*.sqlite
-data/*.sqlite-journal
+data/*.sqlite*
 coverage/
