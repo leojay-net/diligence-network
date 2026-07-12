@@ -102,13 +102,22 @@ async function main(): Promise<void> {
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
       logger.error("failed to produce report", { orderId: order.orderId, error: message });
+      // Reject rather than leave the buyer's order stuck at "paid" - same
+      // reasoning as providerRuntime.ts: without an explicit reject, the
+      // buyer's own Hirer.hire() call just times out with no useful signal.
+      await client.rejectOrder(order.orderId, message).catch((rejectErr) => {
+        logger.error("failed to reject order after a failed workflow", {
+          orderId: order.orderId,
+          error: rejectErr instanceof Error ? rejectErr.message : String(rejectErr),
+        });
+      });
       db.upsertOrder({
         orderId: order.orderId,
         counterpartyServiceId: order.requesterAgentId,
         direction: "provider",
         serviceDescription: "Verified due-diligence report, produced by hiring and cross-checking independent sub-agents.",
         priceUsdc: order.price,
-        status: "failed",
+        status: "rejected",
         createdAt: order.createdTime,
         updatedAt: new Date().toISOString(),
         requestPayload: order.negotiationId,

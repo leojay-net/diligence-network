@@ -441,6 +441,29 @@ export class SimAgentClient implements CapAgentClient {
           });
         }
       }
+
+      // A provider that failed to deliver rejects the order (see
+      // providerRuntime.ts) rather than leaving it stuck at "paid" - the
+      // requester's Hirer.hire() is waiting on exactly this event to fail
+      // fast instead of running out its full delivery timeout.
+      const rejectedOrders = db
+        .prepare(`SELECT * FROM orders WHERE requesterAgentId = ? AND status = 'rejected'`)
+        .all(agentId) as SimOrderRow[];
+      for (const row of rejectedOrders) {
+        if (markSeen(`order-rejected:${row.orderId}`)) {
+          dispatch({
+            type: "order_rejected",
+            raw: row as unknown as Record<string, unknown>,
+            order_id: row.orderId,
+            negotiation_id: row.negotiationId,
+            service_id: row.serviceId,
+            requester_agent_id: row.requesterAgentId,
+            provider_agent_id: row.providerAgentId,
+            status: row.status,
+            reason: row.rejectReason,
+          });
+        }
+      }
     };
 
     const interval = setInterval(poll, POLL_INTERVAL_MS);

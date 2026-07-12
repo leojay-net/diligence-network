@@ -46,7 +46,7 @@ async function handleGrading(request: GradingRequest): Promise<ClaimGraderOutput
     prompt: `Grade the following claims against their supplied evidence:\n\n${claimsForPrompt}\n\nReturn your verdicts as structured JSON.`,
     schema: ClaimGraderOutputSchema,
     allowWebSearch: false,
-    maxTokens: 8000,
+    maxOutputTokens: 8000,
   });
 }
 

@@ -52,7 +52,7 @@ async function planQuestions(request: DiligenceRequest): Promise<string[]> {
     prompt: `Subject: ${request.subject}\n\nPropose at most ${cap} sub-question(s).`,
     schema: DiligencePlanSchema,
     allowWebSearch: false,
-    maxTokens: 2000,
+    maxOutputTokens: 2000,
   });
   return plan.questions.slice(0, cap);
 }

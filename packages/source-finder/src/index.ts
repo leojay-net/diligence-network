@@ -33,7 +33,7 @@ async function handleResearch(request: ResearchRequest): Promise<SourceFinderOut
     prompt: `Research question: ${request.question}\n\nReturn your findings as structured JSON.`,
     schema: SourceFinderOutputSchema,
     allowWebSearch: true,
-    maxTokens: 8000,
+    maxOutputTokens: 8000,
   });
 }
 

@@ -116,13 +116,23 @@ export async function runProviderService<TRequest, TResult>(
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
       opts.logger.error("failed to deliver order", { orderId: order.orderId, error: message });
+      // Reject rather than leave the order stuck at "paid" - without this,
+      // the requester side (Hirer.hire()) has no signal that anything went
+      // wrong and just burns its full deliveryTimeoutMs waiting on a
+      // delivery that will never arrive.
+      await client.rejectOrder(order.orderId, message).catch((rejectErr) => {
+        opts.logger.error("failed to reject order after a failed delivery", {
+          orderId: order.orderId,
+          error: rejectErr instanceof Error ? rejectErr.message : String(rejectErr),
+        });
+      });
       opts.db.upsertOrder({
         orderId: order.orderId,
         counterpartyServiceId: order.requesterAgentId,
         direction: "provider",
         serviceDescription: opts.serviceDescription,
         priceUsdc: order.price,
-        status: "failed",
+        status: "rejected",
         createdAt: order.createdTime,
         updatedAt: new Date().toISOString(),
         requestPayload: order.negotiationId,
