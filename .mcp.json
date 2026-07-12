@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "croo": {
+      "command": "npx",
+      "args": ["-y", "@croo-network/mcp-server"],
+      "env": {
+        "CROO_SDK_KEY": "${CROO_SDK_KEY}",
+        "CROO_API_URL": "${CROO_API_URL:-https://api.croo.network}",
+        "CROO_WS_URL": "${CROO_WS_URL:-wss://api.croo.network/ws}"
+      }
+    }
+  }
+}
